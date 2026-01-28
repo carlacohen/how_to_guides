@@ -1,0 +1,6 @@
+Perform conda backup using Charlie's script
+$ cd /project/tendonhca/ccohen/git/conda_envs/ccb
+$ mamba activate scflow_kb
+$ python conda_env_backup.py
+
+Push to git on a new branch of today's date. 
