@@ -1,0 +1,49 @@
+### How to use conda with the cluster. 
+
+Make a conda env that contains your required software alongside the requirements for the cluster/jupyter interface:
+- python=3.11.14
+- notebook=6.5.4 (actually I had to upgrade to 6.5.6 to avoid an error)
+- nb_conda_kernels
+
+Run this command to tell the jupyter about the conda env (only need to do this for new envs):
+$ python -m ipykernel install --user --name=object-prep-env --display-name='Conda (object-prep-env)'
+
+Create a job script that tells the notebook to run. 
+
+```
+#!/bin/bash
+
+#SBATCH -J jupyter-wn  # job name
+#SBATCH --time=1:00:00  # 1 hour
+#SBATCH --ntasks=4
+#SBATCH --mem=10G
+#SBATCH --partition=short
+
+jupyter-notebook list | grep "ccb-wn.sock"
+if [ $? -eq 1 ]; then
+  # Not already running so safe to start Jupyter
+  mkdir -p $HOME/jupyter
+  echo "Starting notebook"
+  jupyter-notebook -y --NotebookApp.password_required=false --NotebookApp.token="" --sock=$HOME/jupyter/ccb-wn.sock
+fi
+```
+
+Navigate to the directory with the job script e.g. 
+$ cd /project/musclehca/ccohen/git/musclehca/object_prep/
+
+Activate the conda env
+$ load_mamba
+$ mamba activate object-prep-env
+(NB it should be possible to put these commands in the job script but this is broken for me).
+
+Launch the job
+$ sbatch jupyter.sh
+
+Wait for the job to start running.
+Launch connect-to-wn-jupyter
+Add passwords as required
+Go to: 
+Open the script e.g. DeMicheli_add_metadata.ipynb
+Choose the correct kernel for the conda env
+
+BINGO!

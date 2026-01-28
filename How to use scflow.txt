@@ -1,0 +1,41 @@
+1. Clone the git repo for scflow
+
+https://github.com/cribbslab/scflow
+
+2. Navigate to your git repo 
+e.g. 
+/myfolder/scflow
+
+3. Create the conda env
+
+mamba env create -f conda/environments/scflow.yml
+conda activate scflow
+python setup.py develop
+
+# Install a specific version of kb-tools from Adam's cloned repo
+git clone git@github.com:Acribbs/kb_python.git
+cd kb_python
+python setup.py develop
+
+$ scflow --help
+
+4. Run the config to generate the yml file
+
+scflow singlecell config
+
+5. Update the yml file
+Add the correct genome
+
+6. Rename the input fastq files
+
+$ for file in *.fastq.gz; do mv -- "$file" "${file//_R1_001.fastq.gz/.fastq.1.gz}"; done
+$ for file in *.fastq.gz; do mv -- "$file" "${file//_R2_001.fastq.gz/.fastq.2.gz}"; done
+
+7. Make a new analysis folder
+e.g. 20240513_kallisto
+make a directly called data.dir
+Make symlinks to the data in data.dir
+$ find /project/tendonhca/shared/chromium/backup/20211026 -name \*.gz -exec ln -s "{}" /project/tendonhca/shared/chromium/analysis/20230922_quadriceps/data.dir/ ';'
+$ find /project/tendonhca/shared/chromium/backup/20220112-name \*.gz -exec ln -s "{}" /project/tendonhca/shared/chromium/analysis/20230922_quadriceps/data.dir/ ';'
+
+

@@ -1,0 +1,23 @@
+## Snakemake commands
+
+# run the pipeline up to a certain output
+snakemake --cores 1 calls/all.vcf
+
+# dry run of the pipeline
+snakemake -np calls/all.vcf
+
+# make a picture of the pipeline
+snakemake --dag | dot -Tsvg > dag.svg
+
+# NB if you add a rule "all" at the top of the Snakefile, you can run the whole pipeline with 
+snakemake -n
+
+# add number of cores and use conda
+snakemake --cores 10 -sdm conda
+
+# run using slurm
+snakemake --software-deployment-method conda --profile default
+This requires a config file in: ~/.config/snakemake/default
+
+snakemake --software-deployment-method conda --profile default --directory /project/ancestryhca/shared/chromium/analysis/20251006_Zim_soft_tissue
+

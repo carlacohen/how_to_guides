@@ -1,0 +1,18 @@
+############
+### tmux ###
+############
+
+How to use tmux so that the session is preserved, e.g. when uploading files via ftp. 
+
+Create a new tmux session on the cluster
+$ tmux
+
+Connection drops
+Log back onto cluster using ssh
+Check if there is a tmux session open 
+$ tmux ls
+
+Reactivate the tmux session
+$ tmux attach -t 0
+
+More instructions here: https://hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/

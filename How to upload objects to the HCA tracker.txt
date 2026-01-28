@@ -1,0 +1,21 @@
+### How to upload objects to the HCA tracker
+
+$  mamba activate hca-tracker
+
+Configure your AWS CLI
+$ aws configure --profile hca-tracker-upload # answer the questions.
+
+AWS Access Key ID: # add key
+AWS Secret Access Key: # add key
+Default region name [us-east-1]: # enter
+Default output format [json]: #enter
+
+[Optional] Validate your profile is set correctly with:
+$ aws sts get-caller-identity --profile hca-tracker-upload 
+
+$ hca-smart-sync config init [press enter twice]
+
+[Optional] 
+$ hca-smart-sync config show
+Be in the directory for the source datasets
+$ hca-smart-sync sync source-datasets

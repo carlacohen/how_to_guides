@@ -1,0 +1,31 @@
+# How to use snakemake with the cluster
+
+1. Create a config file
+Make a file with the following contents. This tells snakemake the default slurm settings to use.
+
+executor: slurm
+jobs: 100
+latency-wait: 15
+default-resources:
+ - slurm_partition=short
+ - runtime=10
+ - mem=2G
+ - tmpdir=system_tmpdir
+rerun-incomplete: True
+printshellcmds: True
+slurm-keep-successful-logs: True
+
+Save as
+~/.config/snakemake/default/config.yaml
+
+2. Install snakemake-executor-plugin-slurm in your snakemake conda environement
+
+3. When you run the snakemake command use the format:
+snakemake --software-deployment-method conda --profile default
+
+4. If you want to update the slurm job settings to this in the rule e.g.
+ resources:
+        mem_gb=8, # FastQC typically needs 2GB per thread
+        runtime=60, # Usually completes within an hour
+        slurm_partition="short", # short partition is fine for FastQC
+        nodes=1 # Request a single node

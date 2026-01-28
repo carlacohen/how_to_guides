@@ -1,0 +1,20 @@
+# Notes for workstation
+
+Use nomachine to access the HCA workstation
+New virtual desktop, or re-connect to existing one.
+
+To launch firefox:
+$ firefox -p
+
+To add to .bashrc to make firefox work:
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+
+Where is my stuff?
+/media/apc1/ccohen
+
+To run a jupyter notebook
+$ load_mamba
+$ mamba activate scvi_env
+$ jupyter notebook
+This launches the directory that you are in within the firefox window. 
+
