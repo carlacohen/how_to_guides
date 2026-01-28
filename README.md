@@ -5,4 +5,5 @@ General how to guides for various technical processes for my own resource
 - How to upload objects to the HCA tracker
 - How to use tmux
 - How to use the HCA workstation
+- How to back up conda envs to git  
 - Snakemake commands  
