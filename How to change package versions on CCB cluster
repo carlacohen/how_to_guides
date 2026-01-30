@@ -1,0 +1,10 @@
+# How to use your own version of a package eg. Seurat v4 on the CCB cluster
+
+Start a new R session
+Install SeuratObject v 4.1.4 and Seurat v4.4.0 in your local library
+> remotes::install_version("SeuratObject", "4.1.4", repos = c("https://satijalab.r-universe.dev", getOption("repos")))
+> remotes::install_version("Seurat", "4.4.0", repos = c("https://satijalab.r-universe.dev", getOption("repos")))
+At the prompt Choose 3 "None"
+
+Now these versions will be loaded by default when you use
+> library(Seurat) 
