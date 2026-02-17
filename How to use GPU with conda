@@ -1,0 +1,60 @@
+# How to use the GPU on the CCB cluster from a conda environment 
+
+# Use the rapids tool to identify compatible packages
+# https://docs.rapids.ai/install/
+# I selected cuda 12.2-12.9, python 3.11, and pytorch
+# this created a conda command as follows: 
+# "conda create -n rapids-26.02 -c rapidsai -c conda-forge \
+#    rapids=26.02 python=3.11 'cuda-version>=12.2,<=12.9' \
+#    'pytorch=*=*cuda*'"
+
+# Another option is to use this information to modify a conda .yaml file to include these specific versions
+# I didn't actually need the rapidsai functionality 
+
+# Before running the conda create command I started an interactive run on the gpu node. This means that conda will look for the gpu versions of packages. 
+$ run --partition=gpu --gpus 1 --cpus-per-task 5 --mem 16G -t 01:00:00 --pty bash -l
+
+# Create the environment on the gpu node
+$ conda create -f my_env.yaml
+
+# Activate the environment
+$ conda activate my_env
+
+# Check if the gpus can be accessed
+# Launch python and look for the cuda
+$ python
+> import torch
+> torch.cuda.is\_available()
+True
+> exit()
+
+# Check the nvidia-smi
+$ nvidia-smi
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 535.288.01             Driver Version: 535.288.01   CUDA Version: 12.2     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA L40S                    On  | 00000000:3F:00.0 Off |                    0 |
+| N/A   25C    P8              32W / 350W |      0MiB / 46068MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+
+# If in doubt run the test python script
+$ cd /project/musclehca/ccohen/gpu-test
+$ module load python-cbrg
+$ module load cuda/12.2
+$ python gpu-test.py
+Meanwhile open a new tmux window and check the nvidia-smi
+$ nvidia-smi
+Something should be in the box at the bottom.
