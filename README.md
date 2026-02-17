@@ -7,4 +7,5 @@ General how to guides for various technical processes for my own resource
 - How to use the HCA workstation
 - How to back up conda envs to git
 - How to use scflow  
-- Snakemake commands  
+- Snakemake commands
+- How to use the GPU from a conda environment
