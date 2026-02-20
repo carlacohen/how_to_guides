@@ -12,7 +12,7 @@
 # I didn't actually need the rapidsai functionality 
 
 # Before running the conda create command I started an interactive run on the gpu node. This means that conda will look for the gpu versions of packages. 
-$ run --partition=gpu --gpus 1 --cpus-per-task 5 --mem 16G -t 01:00:00 --pty bash -l
+$ srun --partition=gpu --gpus 1 --cpus-per-task 5 --mem 16G -t 01:00:00 --pty bash -l
 
 # Create the environment on the gpu node
 $ conda create -f my_env.yaml
@@ -24,7 +24,7 @@ $ conda activate my_env
 # Launch python and look for the cuda
 $ python
 > import torch
-> torch.cuda.is\_available()
+> torch.cuda.is_available()
 True
 > exit()
 
