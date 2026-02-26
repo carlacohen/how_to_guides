@@ -1,0 +1,31 @@
+### How to run cellranger count on one sample  ###
+
+# Create a working directory 
+
+$ mkdir cellranger_demo  
+$ cd cellranger_demo  
+
+# Make a data directory 
+$ mkdir data  
+
+# Make softlinks to the fastq files in the data directory  
+NB use the naming convention: 
+[Sample Name]_S1_[Read Type]_001.fastq.gz
+
+$ ln -s /path/to/fastq/R1.fastq.gz data/sample1_S1_R1_001.fastq.gz
+$ ln -s /path/to/fastq/R2.fastq.gz data/sample1_S1_R1_001.fastq.gz
+
+# Make softlinks to the genome reference 
+
+$  ln -s /project/ancestryhca/shared/chromium/analysis/20250926_Zim_soft_tissue_cellranger/refdata-gex-GRCh38-2020-A/ .
+
+# Copy the slurm template file 
+$ cp /project/ancestryhca/shared/chromium/analysis/20251002_Zim_soft_tissue_cellranger_cluster/slurm.template .
+
+# Copy and update the cellranger count slurm script  
+--id will be the name of the output directory 
+--sample is the sample name that has to match the start of the fastq files e.g. sample1
+$ cp /project/tendonhca/ccohen/teaching/TENET_snRNAseq/cellranger_count.sh 
+
+Run the job 
+$ sbatch cellranger_count.sh
