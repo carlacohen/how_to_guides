@@ -9,3 +9,4 @@ General how to guides for various technical processes for my own resource
 - How to use scflow  
 - Snakemake commands
 - How to use the GPU from a conda environment
+- How to run cellranger count on one sample  
