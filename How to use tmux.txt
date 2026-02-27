@@ -15,4 +15,13 @@ $ tmux ls
 Reactivate the tmux session
 $ tmux attach -t 0
 
+Make a new window 
+$ Ctrl+b p
+
+Go to the next window 
+$ Ctrl+b n
+
+Go to the previous window 
+$ Ctrl+b p
+
 More instructions here: https://hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/
