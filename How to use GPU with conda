@@ -58,3 +58,24 @@ $ python gpu-test.py
 Meanwhile open a new tmux window and check the nvidia-smi
 $ nvidia-smi
 Something should be in the box at the bottom.
+
+# Next steps - using scvi-tools with GPU 
+Made a test script (courtesy of chatgpt)
+$ cd  /project/musclehca/ccohen/gpu-test
+$ nano scvi-tools-test.py
+Start an interactive node
+$ srun --partition=gpu --gpus 1 --cpus-per-task 5 --mem 16G -t 01:00:00 --pty bash -l
+Load the conda env
+$ mamba activate scvi-tools
+Run the task interactively
+$ python scvi-tools-test.py
+
+To run as a job
+Create job script
+$ nano jobscript.sh
+NB this loads conda and then activates the conda env in the job script. 
+Then it runs the job. 
+
+Need to bear this in mind for future pipelines. 
+
+
