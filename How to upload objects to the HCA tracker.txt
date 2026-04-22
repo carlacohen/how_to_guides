@@ -13,6 +13,9 @@ Default output format [json]: #enter
 [Optional] Validate your profile is set correctly with:
 $ aws sts get-caller-identity --profile hca-tracker-upload 
 
+Check the pip installation (otherwise it can't find the tracker)
+$ pipx ensurepath
+
 $ hca-smart-sync config init [press enter twice]
 
 [Optional] 
