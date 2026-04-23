@@ -19,23 +19,26 @@ python setup.py develop
 
 $ scflow --help
 
-4. Run the config to generate the yml file
+4. Make a new analysis folder
+e.g. 20240513_kallisto
+make a directly called data.dir
+Make symlinks to the data in data.dir
+$ find /project/tendonhca/shared/chromium/backup/20211026 -name \*.gz -exec ln -s "{}" /project/tendonhca/shared/chromium/analysis/20230922_quadriceps/data.dir/ ';'
+$ find /project/tendonhca/shared/chromium/backup/20220112-name \*.gz -exec ln -s "{}" /project/tendonhca/shared/chromium/analysis/20230922_quadriceps/data.dir/ ';'
 
-scflow singlecell config
+5. Run the config to generate the yml file
+$ scflow main quantnuclei config
+
 
 5. Update the yml file
+Make a softlink to the genome file
 Add the correct genome
+If it is 10Xv4 this is unsupported and you have to provide the whitelist: 3M-3pgex-may-2023.txt
 
 6. Rename the input fastq files
 
 $ for file in *.fastq.gz; do mv -- "$file" "${file//_R1_001.fastq.gz/.fastq.1.gz}"; done
 $ for file in *.fastq.gz; do mv -- "$file" "${file//_R2_001.fastq.gz/.fastq.2.gz}"; done
 
-7. Make a new analysis folder
-e.g. 20240513_kallisto
-make a directly called data.dir
-Make symlinks to the data in data.dir
-$ find /project/tendonhca/shared/chromium/backup/20211026 -name \*.gz -exec ln -s "{}" /project/tendonhca/shared/chromium/analysis/20230922_quadriceps/data.dir/ ';'
-$ find /project/tendonhca/shared/chromium/backup/20220112-name \*.gz -exec ln -s "{}" /project/tendonhca/shared/chromium/analysis/20230922_quadriceps/data.dir/ ';'
 
 
