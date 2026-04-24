@@ -1,0 +1,9 @@
+### Check checksums
+
+Once you have downloaded data e.g. fastq.gz files, you should check the checksums to see if they downloaded properly
+
+# Put all the checksum files into one text file
+$ cat *.md5 >> md5sum.txt
+# Check that the checksums match with the downloaded files
+$ md5sum -c md5sum.txt
+Hopefully it reads "OK" for each file
